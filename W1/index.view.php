@@ -14,14 +14,10 @@
 </head>
 
 <body>
-
-    
-
     <ul>
-        <?php foreach ($animals as $animal) : ?>
-            <li><?= $animal; ?></li>
+        <?php foreach ($task as $category => $val) : ?>
+            <li><strong><?= $category; ?></strong> <?= $val; ?></li>
         <?php endforeach; ?>
     </ul>
-    
 </body>
 </html>
