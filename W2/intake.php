@@ -1,3 +1,12 @@
+<?php
+    if (isset($_POST['storePatient'])) {
+        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_VALIDATE_STRING);
+    }
+    $error = "";
+    if ($first_name = ""){
+        $error .= "<li>Please Enter the First Name</li>";
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,7 +104,9 @@
     </style>
 
 </head>
+
 <body>
+
     <div class="navbar">
         <a href="mainpage.php">Home</a>
             <div class="dropdown">
@@ -138,29 +149,110 @@
         }
 
     </script>
-    
-    <h1>PHP and MySQL - Ryan Burns</h1>
-    <p>Welcome to the home page! Feel free to browse my projects from this course.</p>
-    <h2>Assignment Overview</h2>
-    <ul>
-        <li><a href="../W1/index.php" target="_blank">Week 1 - Fizz Buzz</a></li>
-        <li><a href="mainpage.php" target="_blank">Week 2 - Main Course Page</a></li>
-        <li><a href="intake.php" target="_blank">Week 2 - Patient Intake Form</a></li>
-        <li><a href="">Week 3 - None</a></li>
-        <li><a href="">Week 4 - None</a></li>
-        <li><a href="">Week 5 - None</a></li>
-        <li><a href="">Week 6 - None</a></li>
-        <li><a href="">Week 7 - None</a></li>
-        <li><a href="">Week 8 - None</a></li>
-        <li><a href="">Week 9 - None</a></li>
-        <li><a href="">Week 10 - None</a></li>
-    </ul>
 
-    <hr />
+    <style type="text/css">
+       .wrapper {
+            display: grid;
+            grid-template-columns: 180px 400px;
+        }
+        .label {
+            text-align: right;
+            padding-right: 10px;
+            margin-bottom: 5px;
+        }
+        input[type=text] {width: 200px;}
+        .error {color: red;}
+        div {margin-top: 5px;}
+    </style>
+
+    <h2>Patient Intake Form</h2>
+
+    <form name="patient" method="post" action="patient.php">
+
+        <div class="wrapper">
+
+            <div class="label">
+                <label>First Name:</label>
+            </div>
+
+            <div>
+                <input type="text" name="first_name" value="" />
+            </div>
+
+            <div class="label">
+                <label>Last Name:</label>
+            </div>
+
+            <div>
+                <input type="text" name="last_name" value="" />
+            </div>
+
+            <div class="label">
+                <label>Married:</label>
+            </div>
+
+            <div>
+                <input type="radio" name="married" value="yes"  >Yes
+
+                    
+                <input type="radio" name="married" value="no"   />No
+                
+            </div>
+
+            <div class="label">
+                <label>Conditions:</label>
+            </div>
+            
+            <div>
+                <input type="checkbox"  name="conditions[]" value="High Blood Pressure">High Blood Pressure
+                <input type="checkbox"  name="conditions[]" value="Diabetes">Diabetes
+                <input type="checkbox"  name="conditions[]" value="Heart Condition">Heart Condition
+            </div>
+
+            <div class="label">
+                <label>Birth Date:</label>
+            </div>
+
+            <div>
+                <input type="date" name="birth_date" value="" />
+            </div>
+
+            <div class="label">
+                <label>Height:</label>
+            </div>
+
+            <div>
+                Feet: <input type="text" name="ft" value="" style="width:40px;" />
+                Inches: <input type="text" name="inches" value="0" style="width:40px;" />
+            </div>
+
+            <div class="label">
+                <label>Weight (pounds):</label>
+            </div>
+            
+            <div>
+                <input type="text" name="weight" value=""  style="width:40px;" />
+            </div>
+
+            <div>
+                &nbsp;
+            </div>
+
+            <div>
+                <input type="submit" name="storePatient" value="Store Patient Information" />
+            </div>
+        
+        </div>
+    
+    </form>
+    
+    <hr/>
+
     <?php       
         $file = basename($_SERVER['PHP_SELF']);
         $mod_date=date("F d Y h:i:s A", filemtime($file));
         echo "File last updated $mod_date ";
     ?>
+
 </body>
 </html>
