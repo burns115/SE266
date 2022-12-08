@@ -103,9 +103,9 @@
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content" id="myDropdown">
-                    <a href="../W1/index.php" target="_blank">Week 1 - Fizz Buzz</a>
+                    <a href="../../W1/index.php" target="_blank">Week 1 - Fizz Buzz</a>
                     <a href="mainpage.php">Week 2 - Main Course Page</a>
-                    <a href="intake.php" target="_blank">Week 2 - Patient Intake Form</a>
+                    <a href="../intake/intake.php" target="_blank">Week 2 - Patient Intake Form</a>
                     <a href="">Week 3 - None</a>
                     <a href="">Week 4 - None</a>
                     <a href="">Week 5 - None</a>
@@ -143,9 +143,9 @@
     <p>Welcome to the home page! Feel free to browse my projects from this course.</p>
     <h2>Assignment Overview</h2>
     <ul>
-        <li><a href="../W1/index.php" target="_blank">Week 1 - Fizz Buzz</a></li>
+        <li><a href="../../W1/index.php" target="_blank">Week 1 - Fizz Buzz</a></li>
         <li><a href="mainpage.php" target="_blank">Week 2 - Main Course Page</a></li>
-        <li><a href="intake.php" target="_blank">Week 2 - Patient Intake Form</a></li>
+        <li><a href="../intake/intake.php" target="_blank">Week 2 - Patient Intake Form</a></li>
         <li><a href="">Week 3 - None</a></li>
         <li><a href="">Week 4 - None</a></li>
         <li><a href="">Week 5 - None</a></li>
