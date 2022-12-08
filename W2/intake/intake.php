@@ -150,10 +150,10 @@
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-content" id="myDropdown">
-                    <a href="../../W1/index.php" target="_blank">Week 1 - Fizz Buzz</a>
+                    <a href="../../W1/index.php">Week 1 - Fizz Buzz</a>
                     <a href="../mainpage/mainpage.php">Week 2 - Main Course Page</a>
                     <a href="intake.php">Week 2 - Patient Intake Form</a>
-                    <a href="">Week 3 - None</a>
+                    <a href="../../W3/atm_starter.php">Week 3 - ATM Simulator</a>
                     <a href="">Week 4 - None</a>
                     <a href="">Week 5 - None</a>
                     <a href="">Week 6 - None</a>

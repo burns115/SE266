@@ -33,17 +33,17 @@
         
         public function getStartDate() 
         {
-            return this->startDate;
+            return $this->startDate;
         } // end getStartDate
 
         public function getBalance() 
         {
-            return this->balance;
+            return $this->balance;
         } // end getBalance
 
         public function getAccountId() 
         {
-            return this->accountId;
+            return $this->accountId;
         } // end getAccountId
 
         // Display AccountID, Balance and StartDate in a nice format
