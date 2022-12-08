@@ -1,22 +1,24 @@
-
 <?php
+include "checking.php";
+include "savings.php";
+include "postcheck.php";
+
     if (isset ($_POST['withdrawChecking'])) 
     {
-        echo "I pressed the checking withdrawal button";
+        $checking->withdrawal(filter_input(INPUT_POST, 'checkingWithdrawAmount', FILTER_VALIDATE_FLOAT));
     } 
     else if (isset ($_POST['depositChecking'])) 
     {
-        echo "I pressed the checking deposit button";
+        $checking->deposit(filter_input(INPUT_POST, 'checkingDepositAmount', FILTER_VALIDATE_FLOAT));
     } 
     else if (isset ($_POST['withdrawSavings'])) 
     {
-        echo "I pressed the savings withdrawal button";
+        $savings->withdrawal(filter_input(INPUT_POST, 'savingsWithdrawAmount', FILTER_VALIDATE_FLOAT));
     } 
     else if (isset ($_POST['depositSavings'])) 
     {
-        echo "I pressed the savings deposit button";
+        $savings->deposit(filter_input(INPUT_POST, 'savingsDepositAmount', FILTER_VALIDATE_FLOAT));
     } 
-     
 ?>
 
 <!DOCTYPE html>
@@ -57,19 +59,22 @@
 
     <form method="post">
        
-        <input type="hidden" name="checkingAccountId" value="C123" />
-        <input type="hidden" name="checkingDate" value="12-20-2019" />
-        <input type="hidden" name="checkingBalance" value="1000" />
-        <input type="hidden" name="savingsAccountId" value="S123" />
-        <input type="hidden" name="savingsDate" value="03-20-2020" />
-        <input type="hidden" name="savingsBalance" value="5000" />
+        <input type="hidden" name="checkingAccountId" value="<?=$checking->getAccountId()?>" />
+        <input type="hidden" name="checkingDate" value="<?=$checking->getStartDate()?>" />
+        <input type="hidden" name="checkingBalance" value="<?=$checking->getBalance()?>" />
+        <input type="hidden" name="savingsAccountId" value="<?=$savings->getAccountId()?>" />
+        <input type="hidden" name="savingsDate" value="<?=$savings->getStartDate()?>" />
+        <input type="hidden" name="savingsBalance" value="<?=$savings->getBalance()?>" />
         
     <h1>ATM</h1>
         <div class="wrapper">
             
             <div class="account">
               
-                    
+                <h2>Checking Account</h2><li>Account ID: C123</li><li>Balance: $1,000.00</li><li>Account Opened: 12-20-2019</li>                    <input type="hidden" name="checkingAccountId" value="C123" />
+                    <input type="hidden" name="checkingDate" value="12-20-2019" />
+                    <input type="hidden" name="checkingBalance" value="1000" />
+
                     <div class="accountInner">
                         <input type="text" name="checkingWithdrawAmount" value="" />
                         <input type="submit" name="withdrawChecking" value="Withdraw" />
@@ -83,7 +88,8 @@
 
             <div class="account">
                
-                    
+                    <div class="accountInner">
+                    </div>
                     <div class="accountInner">
                         <input type="text" name="savingsWithdrawAmount" value="" />
                         <input type="submit" name="withdrawSavings" value="Withdraw" />
