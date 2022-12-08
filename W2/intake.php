@@ -1,12 +1,44 @@
-<?php
-    if (isset($_POST['storePatient'])) {
-        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_VALIDATE_STRING);
+<?php 
+
+    function bmi($ftHeight, $inHeight, $weight){
+        $height = (($ftHeight * 12) + $inHeight) * 0.0254;
+        $weight = $weight / 2.20462;
+
+        $bmi = $weight / ($height * $height);
+
+        return $bmi;
     }
-    $error = "";
-    if ($first_name = ""){
-        $error .= "<li>Please Enter the First Name</li>";
+
+    function age($birth){
+        $presentDate = new DateTime();
+
+        $bdate = new DateTime($birth);
+
+        $interval = $presentDate->diff($bdate);
+
+        return $interval->y;
+    }
+
+    function bmiDescription($bmi){
+        if($bmi >= 30) {
+            return "Obese";
+        }
+
+        elseif ($bmi >= 25) {
+            return "Overweight";
+        }
+
+        elseif ($bmi >= 18.5) {
+            return "Healthy weight";
+        }
+
+        else{
+            return "Underweight";
+        }
     }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,7 +100,7 @@
             border: none;
             outline: none;
             color: white;
-            padding: 14px 66px;
+            padding: 14px 55px;
             background-color: inherit;
             font-family: inherit;
             margin: 0;
@@ -99,6 +131,10 @@
 
         .show {
             display: block;
+        }
+
+        .error {
+            color: red;
         }
 
     </style>
@@ -153,9 +189,14 @@
     <style type="text/css">
        .wrapper {
             display: grid;
-            grid-template-columns: 180px 400px;
+            grid-template-columns: 150px 400px;
         }
         .label {
+            text-align: right;
+            padding-right: 10px;
+            margin-bottom: 5px;
+        }
+        dt {
             text-align: right;
             padding-right: 10px;
             margin-bottom: 5px;
@@ -165,9 +206,66 @@
         div {margin-top: 5px;}
     </style>
 
+    <?php
+        $fname = $lname = $married = $birth = $ftHeight = $inHeight = $weight = $age = "";
+
+        $error = "";
+
+        if (isset($_POST['storePatient'])){
+
+            $fname = filter_input(INPUT_POST, 'fname');
+            if ($fname == "") {
+                $error .= "<li>Please provide first name</li>";
+            }
+            
+            $lname = filter_input(INPUT_POST, 'lname');
+            if ($lname == "") {
+                $error .= "<li>Please provide last name</li>";
+            }
+            
+            $married = filter_input(INPUT_POST, 'married');
+            if ($married == "") {
+                $error .= "<li>Please select a marital status</li>";
+            }
+        
+            $birth = filter_input(INPUT_POST, 'birth');
+            if ($birth == "") {
+                $error .= "<li>Please select a valid date</li>";
+            }
+        
+            $ftHeight = filter_input(INPUT_POST, 'ftHeight', FILTER_VALIDATE_FLOAT);
+            if ($ftHeight == "" or (int) $ftHeight <= 0 ) {
+                $error .= "<li>Please enter a valid height (ft.)</li>";
+            }
+    
+            $inHeight = filter_input(INPUT_POST, 'inHeight', FILTER_VALIDATE_FLOAT);
+            if ($inHeight == "" or (int) $inHeight < 0 or (int) $inHeight > 11) {
+                $error .= "<li>Please enter a valid height (in.)</li>";
+            }
+    
+            $weight = filter_input(INPUT_POST, 'weight', FILTER_VALIDATE_FLOAT);
+            if ($weight == "" or (float) $weight <= 0 ) {
+                $error .= "<li>Please enter a valid weight</li>";
+            }
+    
+            if ($error != "") {
+                echo "<p class='error'>Please fix the following and resubmit</p>";
+                echo "<ul class='error'>$error</ul>";
+            } else{
+
+                $bmi = bmi($ftHeight, $inHeight, $weight);
+                $bmi = round($bmi, 1);
+                $classification = bmiDescription($bmi);
+                $age = age($birth);
+
+                require "patient.php";
+            }
+        }
+    ?>
+    
     <h2>Patient Intake Form</h2>
 
-    <form name="patient" method="post" action="patient.php">
+    <form name="intake" method="post" action="intake.php">
 
         <div class="wrapper">
 
@@ -176,7 +274,7 @@
             </div>
 
             <div>
-                <input type="text" name="first_name" value="" />
+                <input type="text" name="fname" value="<?php echo $fname;?>" />
             </div>
 
             <div class="label">
@@ -184,7 +282,7 @@
             </div>
 
             <div>
-                <input type="text" name="last_name" value="" />
+                <input type="text" name="lname" value="<?php echo $lname;?>" />
             </div>
 
             <div class="label">
@@ -192,21 +290,18 @@
             </div>
 
             <div>
-                <input type="radio" name="married" value="yes"  >Yes
+                <?php if ($married == "Yes"): ?>
+                    <input type="radio" name="married" value="Yes" checked>Yes
+                    <input type="radio" name="married" value="No">No
 
-                    
-                <input type="radio" name="married" value="no"   />No
-                
-            </div>
+                <?php elseif ($married == "No"): ?>
+                    <input type="radio" name="married" value="Yes">Yes
+                    <input type="radio" name="married" value="No" checked>No
 
-            <div class="label">
-                <label>Conditions:</label>
-            </div>
-            
-            <div>
-                <input type="checkbox"  name="conditions[]" value="High Blood Pressure">High Blood Pressure
-                <input type="checkbox"  name="conditions[]" value="Diabetes">Diabetes
-                <input type="checkbox"  name="conditions[]" value="Heart Condition">Heart Condition
+                <?php else: ?>
+                    <input type="radio" name="married" value="Yes">Yes
+                    <input type="radio" name="married" value="No">No
+                <?php endif; ?>
             </div>
 
             <div class="label">
@@ -214,7 +309,7 @@
             </div>
 
             <div>
-                <input type="date" name="birth_date" value="" />
+                <input type="date" name="birth" value="<?php echo $birth;?>" />
             </div>
 
             <div class="label">
@@ -222,8 +317,8 @@
             </div>
 
             <div>
-                Feet: <input type="text" name="ft" value="" style="width:40px;" />
-                Inches: <input type="text" name="inches" value="0" style="width:40px;" />
+                Feet: <input type="text" name="ftHeight" value="<?php echo $ftHeight;?>" style="width:40px;" />
+                Inches: <input type="text" name="inHeight" value="<?php echo $inHeight;?>" style="width:40px;" />
             </div>
 
             <div class="label">
@@ -231,7 +326,7 @@
             </div>
             
             <div>
-                <input type="text" name="weight" value=""  style="width:40px;" />
+                <input type="text" name="weight" value="<?php echo $weight;?>" style="width:40px;" />
             </div>
 
             <div>
