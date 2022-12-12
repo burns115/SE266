@@ -49,7 +49,7 @@
             padding: 4px 55px;
             text-decoration: none;
         }
-        .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+        .navbar a:hover{
             background-color: #FF8C00;
         }
         li {
@@ -80,13 +80,7 @@
         .accountInner {
             margin-left:10px;margin-top:10px;
         }
-        .container div a:hover {
-            background-color: #CC5500;
-        }
-        .container div table tbody td a:hover {
-            background-color: #CC5500;
-        }
-        .container div table tbody td form button:hover {
+        .container div a:hover, .container div table tbody td a:hover, .container div table tbody td form button:hover{
             background-color: #CC5500;
         }
 
