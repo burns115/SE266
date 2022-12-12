@@ -154,7 +154,7 @@
                     <a href="../mainpage/mainpage.php">Week 2 - Main Course Page</a>
                     <a href="intake.php">Week 2 - Patient Intake Form</a>
                     <a href="../../W3/atm_starter.php">Week 3 - ATM Simulator</a>
-                    <a href="">Week 4 - None</a>
+                    <a href="../../W4/viewPatients.php">Week 4 - Patient Listing</a>
                     <a href="">Week 5 - None</a>
                     <a href="">Week 6 - None</a>
                     <a href="">Week 7 - None</a>

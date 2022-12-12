@@ -157,7 +157,7 @@
                     <a href="../W2/mainpage/mainpage.php" >Week 2 - Main Course Page</a>
                     <a href="../W2/intake/intake.php">Week 2 - Patient Intake Form</a>
                     <a href="atm_starter.php">Week 3 - ATM Simulator</a>
-                    <a href="">Week 4 - None</a>
+                    <a href="../W4/viewPatients.php">Week 4 - Patient Listing</a>
                     <a href="">Week 5 - None</a>
                     <a href="">Week 6 - None</a>
                     <a href="">Week 7 - None</a>
@@ -166,9 +166,9 @@
                     <a href="">Week 10 - None</a>
                 </div>
             </div>  
-        <a href="php_resources.php">PHP Resources</a>
-        <a href="git_resources.php">Git Resources</a>
-        <a href="hobbies.php">Hobbies</a>
+        <a href="../W2/mainpage/php_resources.php">PHP Resources</a>
+        <a href="../W2/mainpage/git_resources.php">Git Resources</a>
+        <a href="../W2/mainpage/hobbies.php">Hobbies</a>
         <a href="https://github.com/burns115/SE266" target="_blank">Ryan's GitHub Repo</a>
     </div>
 
