@@ -2,14 +2,38 @@
 
     include (__DIR__ . '/db.php');
 
-    function getPatients(){
+    function getPatients($fName, $lName, $married){
         global $db;
+
+        $sql = "SELECT id, patientFirstName, patientLastName, patientMarried, patientBirthDate FROM patients WHERE 0=0";
 
         $results = [];
 
-        $stmt = $db->prepare("SELECT id, patientFirstName, patientLastName, patientMarried, patientBirthDate FROM patients ORDER BY patientLastName");
+        $binds = [];
 
-        if ($stmt->execute() && $stmt->rowCount() > 0 ){
+        if ($fName != ""){
+            $sql .= " AND patientFirstName LIKE :bfName";
+            $binds['bfName'] = '%' . $fName . '%'; 
+            
+        }
+        if ($lName != ""){
+            $sql .= " AND patientLastName LIKE :blName";
+            $binds['blName'] = '%' . $lName . '%';
+
+        }
+        switch ($married){
+            case "1":
+                $sql .= " AND patientMarried = 1";
+                break;
+
+            case "0":
+                $sql .= " AND patientMarried = 0";
+                break;
+        }
+
+        $stmt = $db->prepare($sql);
+
+        if ($stmt->execute($binds) && $stmt->rowCount() > 0 ){
             $results = $stmt->fetchall(PDO::FETCH_ASSOC);
         }
 
@@ -17,6 +41,7 @@
     }
 
     function addPatient($fName, $lName, $married, $birth){
+
         global $db;
         $stmt = $db->prepare("INSERT INTO patients SET patientFirstName = :bFirst, patientLastName = :bLast, patientMarried = :bMarried, patientBirthDate = :bBirthday");
 
@@ -49,7 +74,7 @@
             ":bBirthday" => $birth
         );
 
-        if ($stmt->execute($binds) && $stmt->rowCount() > 0){
+        if ($stmt->execute($binds) AND $stmt->rowCount() > 0){
             $results = "Data updated";
         }
 
@@ -59,7 +84,7 @@
     function deletePatient ($id) {
         global $db;
         
-        $results = [];
+        $results = "Data was not deleted";
         $stmt = $db->prepare("DELETE FROM patients WHERE id=:bID");
         
         $binds = array(
@@ -88,4 +113,26 @@
         }
 
         return($results);
+    }
+
+    function getAUser($uname){
+
+        global $db;
+
+        $result = [];
+
+        $stmt = $db->prepare("SELECT userID, uname, encPword, salt FROM users WHERE uname=:bUN");
+
+        $binds = array(
+            ":bUN" => $uname
+        );
+
+        if ($stmt->execute($binds) && $stmt->rowCount() > 0) {
+            $results = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        } else{
+            $results = "No user found.";
+        }
+
+        return($results); 
     }

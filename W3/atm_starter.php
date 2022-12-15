@@ -1,4 +1,5 @@
 <?php
+
     include "checking.php";
     include "savings.php";
 
@@ -10,6 +11,7 @@
         $checkingBalance = filter_input(INPUT_POST, 'checkingBalance', FILTER_VALIDATE_FLOAT);
         $checkingDate = filter_input(INPUT_POST, 'checkingDate');
         $checkingAccountId = filter_input(INPUT_POST, 'checkingAccountId');
+
         $savingsBalance = filter_input(INPUT_POST, 'savingsBalance', FILTER_VALIDATE_FLOAT);
         $savingsDate = filter_input(INPUT_POST, 'savingsDate');
         $savingsAccountId = filter_input(INPUT_POST, 'savingsAccountId');
@@ -17,6 +19,7 @@
         $checkingBalance = 1000;
         $checkingDate = '12-20-2019';
         $checkingAccountId = 'C123';
+        
         $savingsBalance = 5000;
         $savingsDate = '3-20-2020';
         $savingsAccountId = 'S123';
@@ -158,12 +161,9 @@
                     <a href="../W2/intake/intake.php">Week 2 - Patient Intake Form</a>
                     <a href="atm_starter.php">Week 3 - ATM Simulator</a>
                     <a href="../W4/viewPatients.php">Week 4 - Patient Listing</a>
-                    <a href="">Week 5 - None</a>
-                    <a href="">Week 6 - None</a>
+                    <a href="../W6/login.php">Week 6 - Patient Search</a>
                     <a href="">Week 7 - None</a>
-                    <a href="">Week 8 - None</a>
-                    <a href="">Week 9 - None</a>
-                    <a href="">Week 10 - None</a>
+                    <a href="">Week 9/10 - None</a>
                 </div>
             </div>  
         <a href="../W2/mainpage/php_resources.php">PHP Resources</a>
@@ -198,7 +198,7 @@
         <input type="hidden" name="savingsDate" value="<?=$savings->getStartDate()?>" />
         <input type="hidden" name="savingsBalance" value="<?=$savings->getBalance()?>" />
         
-    <h1>ATM</h1>
+        <h1>ATM</h1>
     
         <div class="wrapper">
             

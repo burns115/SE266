@@ -49,6 +49,7 @@
 
     if (isPostRequest() AND $action == 'add'){
 
+        var_dump($_POST);
         $result = addPatient($fName, $lName, $married, $birth); 
 
         header('Location: viewPatients.php'); 
