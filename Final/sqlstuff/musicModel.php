@@ -24,7 +24,6 @@
         if ($recordCom != ""){// if record company value is not empty then add the values
             $sql .= " AND recordCom LIKE :bCom";
             $binds['bCom'] = '%' . $recordCom . '%';
-
         }
         if ($genre != ""){// if genre value is not empty then add the values
             $sql .= " AND genre LIKE :bGenre";

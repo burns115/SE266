@@ -6,6 +6,7 @@
         return ( filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST' );
     }
 
+    $error = "";
     if(isset($_GET['action'])){
 
         $action = filter_input(INPUT_GET, 'action');
@@ -34,13 +35,13 @@
 
             $artistName = "";
 
-            $releaseDate = "";
+            $releaseDate = "1991-01-01";
 
             $recordCom = "";
 
             $genre = "";
 
-            $songDuration = "";
+            $songDuration = "0";
 
             $released = "";
         }
@@ -51,8 +52,14 @@
         $musicID = filter_input(INPUT_POST, 'musicID');
         
         $songTitle = filter_input(INPUT_POST, 'songTitle');
+        if ($songTitle == "") {
+            $error .= "<li>Enter the Song Title</li>";
+        }
         
         $artistName = filter_input(INPUT_POST, 'artistName');
+        if ($artistName == "") {
+            $error .= "<li>Enter the Artists Name</li>";
+        }
         
         $releaseDate = filter_input(INPUT_POST, 'releaseDate');
 
@@ -61,8 +68,19 @@
         $genre = filter_input(INPUT_POST, 'genre');
         
         $songDuration = filter_input(INPUT_POST, 'songDuration');
+        if ($songTitle == "") {
+            $error .= "<li>Enter the Duration of the Song</li>";
+        }
 
         $released = filter_input(INPUT_POST, 'released');
+        if ($songTitle == "") {
+            $error .= "<li>Select 'yes' or 'no'</li>";
+        }
+
+        if ($error != "") {
+            echo "<p class='error'>Please fix the following and resubmit</p>";
+            echo "<ul class='error'>$error</ul>";
+        }
     }
 
     if (isPostRequest() AND $action == 'add'){
