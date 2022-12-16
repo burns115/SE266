@@ -1,5 +1,5 @@
 <?php
-    include_once __DIR__ . '/sqlstuff/patientsModel.php';
+    include_once __DIR__ . '/sqlstuff/musicModel.php';
 
     function isPostRequest() {
         return ( filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST' );
@@ -21,7 +21,7 @@
                 $_SESSION['uname'] = $uname; 
                 $_SESSION['loggedIn'] = TRUE; 
                 
-                header('Location: viewPatients.php'); 
+                header('Location: viewMusic.php'); 
     
             } else {
                 $_SESSION['loggedIn'] = FALSE; 
@@ -46,8 +46,8 @@
             display: block;
         }
         body{
-            background-color: black;
-            color: white;
+            background-color: #BABCC9;
+            color: black;
             display: block;
             margin: 8px;
             font-family: "Times New Roman", Times, serif;
@@ -59,10 +59,10 @@
             background-color: gray;
         }
         .btn{
-            border: solid #CC5500;
+            border: solid #e6c36b;
         }
         .btn:hover{
-            border: solid #FF8C00;
+            border: solid black;
         }
         .form-control{
             width: 25%;
@@ -74,8 +74,7 @@
         <?php if(isPostRequest()):?>
 
             <?php if(!$_SESSION['loggedIn'])://Username: rburns Password: rburns?>
-                
-                
+
                 <div role="alert">Username not found/Password may be incorrect.</div>
 
             <?php endif;?>
@@ -95,7 +94,7 @@
                 <input type="password" class="form-control pwordbox" id="inputPword" name='inputPword'>
             </div>
             <br/>
-            <button type="submit" style="background-color: #CC5500; outline-color: white" class="btn btn-primary">Submit</button>
+            <button type="submit" style="background-color: #e6c36b" class="btn btn-primary text-dark">Submit</button>
         </form>
 
     </div>

@@ -110,7 +110,7 @@
                 <a href="../../W4/viewPatients.php">Week 4 - Patient Listing</a>
                 <a href="../../W6/login.php">Week 6 - Patient Search</a>
                 <a href="">Week 7 - None</a>
-                <a href="">Week 9/10 - None</a>
+                <a href="../../Final/login.php">Week 9/10 - Final</a>
             </div>
         </div>  
     <a href="php_resources.php">PHP Resources</a>
