@@ -146,7 +146,7 @@
         <li><a href="../../W3/atm_starter.php">Week 3 - ATM Simulator</a></li>
         <li><a href="../../W4/viewPatients.php">Week 4 - Patient Listing</a></li>
         <li><a href="../../W6/login.php">Week 6 - Patient Search</a></li>
-        <li><a href="">Week 7 - None</a></li>
+        <li><a href="../../W7/login.php">Week 7 - File Upload</a></li>
         <li><a href="../../Final/login.php">Week 9/10 - Final</a></li>
     </ul>
 
